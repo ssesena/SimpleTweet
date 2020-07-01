@@ -13,6 +13,7 @@ public class Tweet {
     public String body;
     public String createdAt;
     public User user;
+    public long id;
     //public JSONArray media;
     //public JSONObject picture;
     public String pictureUrl;
@@ -27,6 +28,7 @@ public class Tweet {
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        tweet.id = jsonObject.getLong("id");
         //tweet.media = jsonObject.getJSONArray("media"); tweet.media.length() > 0; getJSONArray("media").length() > 0)
         if (jsonObject.getJSONObject("entities").has("media")){
             //tweet.picture = tweet.media.getJSONObject(0);
