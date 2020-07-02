@@ -38,6 +38,9 @@ public class TimelineActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeContainer;
     EndlessRecyclerViewScrollListener scrollListener;
 
+    // Instance of the progress action-view
+    MenuItem miActionProgressItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +79,10 @@ public class TimelineActivity extends AppCompatActivity {
         populateHomeTimeline();
     }
 
+
+
     private void loadMoreData() {
+        showProgressBar();
         client.getNextPageOfTweets(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
@@ -94,6 +100,7 @@ public class TimelineActivity extends AppCompatActivity {
 
             }
         }, tweets.get(tweets.size()-1).id);
+        hideProgressBar();
     }
 
     @Override
@@ -110,6 +117,15 @@ public class TimelineActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+
+        // Return to finish
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -149,5 +165,16 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.e(TAG,"onFailure!" + response, throwable);
             }
         });
+    }
+
+    public void showProgressBar() {
+        // Show progress item
+        miActionProgressItem.setVisible(true);
+        Log.i(TAG, "Progress showing");
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        miActionProgressItem.setVisible(false);
     }
 }
