@@ -68,6 +68,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView tvName;
         TextView tvTimestamp;
         ImageView ivPicture;
+        ImageView ivRetweet;
+        ImageView ivFavorite;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +79,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvName = itemView.findViewById(R.id.tvName);
             tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
             ivPicture = itemView.findViewById(R.id.ivPicture);
+            ivRetweet = itemView.findViewById(R.id.ivRetweet);
+            ivFavorite = itemView.findViewById(R.id.ivFavorite);
         }
 
         public void bind(Tweet tweet) {
@@ -88,6 +92,27 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             if (tweet.pictureUrl != null){
                 Glide.with(context).load(tweet.pictureUrl).into(ivPicture);
             }
+            ivFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (ivFavorite.getDrawable().getConstantState() == context.getDrawable(R.drawable.ic_vector_heart_stroke).getConstantState()){
+                        ivFavorite.setImageResource(R.drawable.ic_vector_heart);
+                    } else{
+                        ivFavorite.setImageResource(R.drawable.ic_vector_heart_stroke);
+                    }
+                }
+            });
+            ivRetweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (ivRetweet.getDrawable().getConstantState() == context.getDrawable(R.drawable.ic_vector_retweet_stroke).getConstantState()){
+                        ivRetweet.setImageResource(R.drawable.ic_vector_retweet);
+
+                    } else {
+                        ivRetweet.setImageResource(R.drawable.ic_vector_retweet_stroke);
+                    }
+                }
+            });
         }
 
         public void clearImage(){

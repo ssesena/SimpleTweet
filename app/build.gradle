@@ -11,6 +11,7 @@ android {
         applicationId "com.codepath.apps.restclienttemplate"
         minSdkVersion 21
         targetSdkVersion 28
+        vectorDrawables.useSupportLibrary = true
 
         // Room schemas
         javaCompileOptions {
@@ -55,4 +56,6 @@ dependencies {
     implementation 'org.parceler:parceler-api:1.1.12'
     annotationProcessor 'org.parceler:parceler:1.1.12'
     implementation 'com.android.support:design:28.0.0'
+    implementation "androidx.vectordrawable:vectordrawable:1.0.0" // VectorDrawableCompat
+    implementation "androidx.vectordrawable:vectordrawable-animated:1.0.0" // AnimatedVectorDrawableCompat
 }
