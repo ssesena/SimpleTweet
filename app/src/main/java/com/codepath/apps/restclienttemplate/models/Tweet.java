@@ -16,9 +16,14 @@ public class Tweet {
     public String createdAt;
     public User user;
     public long id;
+    public int likes;
     //public JSONArray media;
     //public JSONObject picture;
     public String pictureUrl;
+    public int retweets;
+    public int originalTweetLikes = -1;
+    public Boolean favorited;
+    public Boolean retweeted;
 
     // empty constructor for Parceler library
     public Tweet(){
@@ -31,11 +36,15 @@ public class Tweet {
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.id = jsonObject.getLong("id");
-        //tweet.media = jsonObject.getJSONArray("media"); tweet.media.length() > 0; getJSONArray("media").length() > 0)
+        tweet.likes = jsonObject.getInt("favorite_count");
+        tweet.retweets = jsonObject.getInt("retweet_count");
+        tweet.favorited = jsonObject.getBoolean("favorited");
+        tweet.retweeted = jsonObject.getBoolean("retweeted");
+        if (jsonObject.has("retweeted_status")) {
+            tweet.originalTweetLikes = jsonObject.getJSONObject("retweeted_status").getInt("favorite_count");
+        }
         if (jsonObject.getJSONObject("entities").has("media")){
-            //tweet.picture = tweet.media.getJSONObject(0);
             tweet.pictureUrl = jsonObject.getJSONObject("entities").getJSONArray(("media")).getJSONObject(0).getString("media_url_https");
-            //tweet.picture.getString("media_url_https");
         }
         return tweet;
     }
@@ -47,4 +56,5 @@ public class Tweet {
         }
         return tweets;
     }
+
 }

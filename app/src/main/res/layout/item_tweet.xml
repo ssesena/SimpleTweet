@@ -105,4 +105,26 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/ivRetweet"
         android:background="#d1cece" />
+
+    <TextView
+        android:id="@+id/tvFavoriteCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/ivFavorite"
+        android:layout_below="@+id/ivPicture"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        tools:text="Likes" />
+
+    <TextView
+        android:id="@+id/tvRetweetCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/ivRetweet"
+        android:layout_below="@+id/ivPicture"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        tools:text="Retweets" />
+
+
 </RelativeLayout>

@@ -155,6 +155,7 @@ public class TimelineActivity extends AppCompatActivity {
                     adapter.clear();
                     adapter.addAll(Tweet.fromJsonArray(jsonArray));
                     swipeContainer.setRefreshing(false);
+                    Log.i(TAG,"onFailure!" + jsonArray.toString());
                 } catch (JSONException e) {
                     Log.e(TAG, "Json exception", e);
                 }
